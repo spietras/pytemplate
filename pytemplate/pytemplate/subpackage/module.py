@@ -6,6 +6,7 @@ This module demonstrates that you can access resources from subpackages.
 
   y = get_something(x)
 """
+from typing import Any
 
 import numpy as np
 from pytemplate import resource_text
@@ -13,7 +14,7 @@ from pytemplate import resource_text
 something_path = "resource.txt"
 
 
-def get_something(x=None):
+def get_something(x: Any = None) -> str:
     """Gets something.
 
     Returns something useful. Demonstrates that you can access resources from subpackages.
