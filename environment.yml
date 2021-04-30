@@ -11,8 +11,10 @@ channels:
 # package will be installed locally with pip -e and afterwards can be treated as any other package
 # if you change something in the package's code you don't have to install the package again
 # that's because locally the code is accessed directly from the source
+# put all pinned package dependencies (with exact versions) in requirements.txt for reproducible environments
 dependencies:
   - python==3.9.2
   - pip==21.0.1
   - pip:
+      - -r file:requirements.txt
       - -e pytemplate

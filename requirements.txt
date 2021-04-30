@@ -1,0 +1,7 @@
+# put all pinned package dependencies (with exact versions) here for reproducible environments
+certifi==2020.12.5
+click==7.1.2
+colorama==0.4.4
+numpy==1.20.2
+shellingham==1.4.0
+typer==0.3.2
