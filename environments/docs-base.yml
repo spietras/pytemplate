@@ -1,0 +1,15 @@
+# provide default environment name
+name: pytemplate-docs
+
+# conda-forge used only if packages not found in defaults
+channels:
+  - defaults
+  - conda-forge
+
+# add all direct docs time conda packages here
+# as you can see we only need the mkdocs package
+# that's because no code needs to run, only the docs files are accessed
+# you can use utils/conda-lock.py to create docs.yml with all (even indirect) dependencies pinned
+dependencies:
+  - python==3.9.2
+  - mkdocs-material==7.1.3

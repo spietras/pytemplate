@@ -1,21 +1,32 @@
-# provide default environment name
 name: pytemplate-test
-
-# conda-forge used only if packages not found in defaults
 channels:
   - defaults
   - conda-forge
-
-# add all test time conda packages here
-# package dependencies should be in setup.cfg instead
-# package will be installed with pip and afterwards can be treated as any other package
-# if you change something in the package's code you have to install the package again
-# that's because you shouldn't modify anything at test time
-# put all pinned package dependencies (with exact versions) in requirements.txt for reproducible environments
 dependencies:
-  - python==3.9.2
+  - _libgcc_mutex==0.1
+  - attrs==20.3.0
+  - ca-certificates==2021.4.13
+  - certifi==2020.12.5
+  - iniconfig==1.1.1
+  - more-itertools==8.7.0
+  - openssl==1.1.1k
+  - packaging==20.9
   - pip==21.0.1
+  - pluggy==0.13.1
+  - py==1.10.0
+  - pyparsing==2.4.7
   - pytest==6.2.3
+  - python==3.9.2
+  - setuptools==52.0.0
+  - six==1.15.0
+  - sqlite==3.35.4
+  - tk==8.6.10
+  - toml==0.10.2
+  - tzdata==2020f
+  - wheel==0.36.2
+  - xz==5.2.5
+  - zlib==1.2.11
   - pip:
       - -r file:requirements.txt
       - ../pytemplate
+
