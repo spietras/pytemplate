@@ -6,10 +6,12 @@ This module demonstrates that you can access resources from subpackages.
 
   y = get_something(x)
 """
-from typing import Any
+from typing import Any, TypeVar
 
 import numpy as np
 from pytemplate import resource_text
+
+T = TypeVar('T')
 
 something_path = "resource.txt"
 
@@ -27,3 +29,8 @@ def get_something(x: Any = None) -> str:
     """
     _ = np.array(x)  # third-party packages work
     return resource_text(something_path)
+
+
+def identity(x: T) -> T:
+    """Returns input."""
+    return x
