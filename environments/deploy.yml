@@ -1,0 +1,19 @@
+# provide default environment name
+name: pytemplate-deploy
+
+# conda-forge used only if packages not found in defaults
+channels:
+  - defaults
+  - conda-forge
+
+# package dependencies should be in setup.cfg instead
+# package will be installed with pip and afterwards can be treated as any other package
+# if you change something in the package's code you have to install the package again
+# that's because you shouldn't modify anything at deploy time
+# put all pinned package dependencies (with exact versions) in requirements.txt for reproducible environments
+dependencies:
+  - python==3.9.2
+  - pip==21.0.1
+  - pip:
+      - -r file:requirements.txt
+      - ../pytemplate
