@@ -55,6 +55,10 @@ def get_dependencies(env: dict) -> Tuple[List[str], List[str]]:
     return conda_dependencies(env), pip_dependencies(env)
 
 
+def get_channels(env: dict) -> List[str]:
+    return env["channels"] if "channels" in env else []
+
+
 def to_dict(env: str) -> dict:
     return yaml.safe_load(env)
 
@@ -104,8 +108,6 @@ def lock_env(env: str) -> str:
 
 
 def is_on_platform(pkg: str, platform: str, channels: Optional[List[str]] = None) -> bool:
-    if channels is None:
-        channels = ["defaults"]
     args = ["conda", "search", "--platform", platform]
     for channel in channels:
         args.extend(["-c", channel])
@@ -115,8 +117,6 @@ def is_on_platform(pkg: str, platform: str, channels: Optional[List[str]] = None
 
 
 def is_independent(pkg: str, channels: Optional[List[str]] = None, platforms: Optional[List[str]] = None) -> bool:
-    if channels is None:
-        channels = ["defaults"]
     if platforms is None:
         platforms = ["linux-64", "osx-64", "win-64"]
     # platform independent if marked as noarch or available on all platforms
@@ -125,11 +125,17 @@ def is_independent(pkg: str, channels: Optional[List[str]] = None, platforms: Op
 
 def merge_deps(deps_a: List[str], deps_b: List[str]) -> List[str]:
     def to_dict(deps: List[str]) -> Dict[str, str]:
-        return {d.partition('=')[0]: d.rpartition('=')[2] for d in deps}
+        def pkg(dep: str) -> str:
+            return dep.partition('=')[0]
+
+        def version(dep: str) -> Optional[str]:
+            return dep.rpartition('=')[2] if '=' in dep else None
+
+        return {pkg(d): version(d) for d in deps}
 
     deps_a, deps_b = to_dict(deps_a), to_dict(deps_b)
     merged_deps = {**deps_a, **deps_b}
-    return [f"{k}=={v}" for k, v in merged_deps.items()]
+    return [f"{k}=={v}" if v else f"{k}" for k, v in merged_deps.items()]
 
 
 def replace_deps(env: dict, conda_deps: List[str], pip_deps: List[str]) -> dict:
@@ -147,13 +153,14 @@ def main() -> Optional[int]:
     # analyze base env file
     old_env_dict = to_dict(read_env(args.env_file))
     old_conda_deps, old_pip_deps = get_dependencies(old_env_dict)
+    channels = get_channels(old_env_dict)
 
     # get whole env file from actual environment
     env_locked_dict = to_dict(lock_env(to_yaml(old_env_dict)))
 
     # merge base and new dependencies
-    new_conda_deps = [x for x in conda_dependencies(env_locked_dict) if is_independent(x)]
-    new_conda_deps = merge_deps(new_conda_deps, old_conda_deps)
+    new_conda_deps = [x for x in conda_dependencies(env_locked_dict) if is_independent(x, channels=channels)]
+    new_conda_deps = merge_deps(old_conda_deps, new_conda_deps)
     new_env_dict = replace_deps(old_env_dict, new_conda_deps, old_pip_deps)
 
     print(to_yaml(new_env_dict))
