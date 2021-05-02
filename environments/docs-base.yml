@@ -12,5 +12,6 @@ channels:
 # you can use utils/conda-lock.py to create docs.yml with all (even indirect) dependencies pinned
 # also if you put dependencies without version here utils/conda-lock.py will act as env updater
 dependencies:
+  # env dependencies
   - python
   - mkdocs-material

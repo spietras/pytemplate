@@ -5,35 +5,26 @@ Python script to get platform-independent environment.yml file with all dependen
 """
 
 import argparse
-import contextlib
 import subprocess
 import sys
 import uuid
-from tempfile import NamedTemporaryFile
+from distutils.core import run_setup
+from pathlib import Path
 from types import TracebackType
-from typing import ContextManager, TextIO, Optional, List, Type, Union, Tuple, Dict
+from typing import Optional, List, Type, Union, Tuple, Dict
 
 import yaml
+from setuptools.config import read_configuration
 
 
 def get_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description="Get platform-independent full environment.yml file")
-    parser.add_argument('env_file', nargs='?', default='-',
-                        help="path to the env file (when not given, reads content directly from stdin)")
+    parser.add_argument('env_file', help="path to the env file")
     return parser
 
 
-@contextlib.contextmanager
-def open_input(filename: str) -> ContextManager[TextIO]:
-    if filename == '-':
-        yield sys.stdin
-    else:
-        with open(filename, 'r') as f:
-            yield f
-
-
-def read_env(env_file_path: str) -> str:
-    with open_input(env_file_path) as i:
+def read_file(file_path: str) -> str:
+    with open(file_path, 'r') as i:
         return i.read()
 
 
@@ -53,6 +44,10 @@ def pip_dependencies(env: dict) -> List[str]:
 
 def get_dependencies(env: dict) -> Tuple[List[str], List[str]]:
     return conda_dependencies(env), pip_dependencies(env)
+
+
+def is_local_dep(dep: str) -> bool:
+    return "-r " not in dep and ("-e " in dep or '..' in dep or '/' in dep or '\\' in dep)
 
 
 def get_channels(env: dict) -> List[str]:
@@ -95,16 +90,10 @@ class RandomCondaEnv(CondaEnv):
         super().__init__(env_file, uuid.uuid4().hex)
 
 
-def lock_env(env: str) -> str:
-    # create temporary .yml file
-    with NamedTemporaryFile(mode='wt', suffix=".yml") as tfile:
-        tfile.write(env)
-        tfile.flush()
-        # create temporary conda environment with given .yml and capture export
-        with RandomCondaEnv(tfile.name) as conda_env:
-            out = subprocess.check_output(["conda", "env", "export", "-n", conda_env.name, "--no-builds"],
-                                          universal_newlines=True)
-        return out
+def lock_env(env_file: str) -> str:
+    with RandomCondaEnv(env_file) as conda_env:
+        return subprocess.check_output(["conda", "env", "export", "-n", conda_env.name, "--no-builds"],
+                                       universal_newlines=True)
 
 
 def is_on_platform(pkg: str, platform: str, channels: Optional[List[str]] = None) -> bool:
@@ -123,14 +112,26 @@ def is_independent(pkg: str, channels: Optional[List[str]] = None, platforms: Op
     return is_on_platform(pkg, "noarch", channels) or all(is_on_platform(pkg, p, channels) for p in platforms)
 
 
+def pkg(dep: str, base_dir: str = '.') -> str:
+    if not is_local_dep(dep):
+        return dep.partition('=')[0]
+    else:
+        p = Path(dep.strip().replace("-e ", '').strip())
+        if not p.is_absolute():
+            p = Path(base_dir) / p
+        p = p.resolve()
+        if (p / "setup.cfg").exists():
+            return read_configuration(p.resolve() / "setup.cfg")['metadata']['name']
+        else:
+            return run_setup(p / "setup.py", stop_after='init').metadata.name
+
+
+def version(dep: str) -> Optional[str]:
+    return dep.rpartition('=')[2] if '=' in dep else None
+
+
 def merge_deps(deps_a: List[str], deps_b: List[str]) -> List[str]:
     def to_dict(deps: List[str]) -> Dict[str, str]:
-        def pkg(dep: str) -> str:
-            return dep.partition('=')[0]
-
-        def version(dep: str) -> Optional[str]:
-            return dep.rpartition('=')[2] if '=' in dep else None
-
         return {pkg(d): version(d) for d in deps}
 
     deps_a, deps_b = to_dict(deps_a), to_dict(deps_b)
@@ -142,26 +143,33 @@ def replace_deps(env: dict, conda_deps: List[str], pip_deps: List[str]) -> dict:
     deps: List[Union[str, dict]] = conda_deps
     if pip_deps:
         deps.append({"pip": pip_deps})
-    if "dependencies" in env:
-        env["dependencies"] = deps
+    env["dependencies"] = deps
     return env
 
 
 def main() -> Optional[int]:
     args = get_parser().parse_args()
 
-    # analyze base env file
-    old_env_dict = to_dict(read_env(args.env_file))
-    old_conda_deps, old_pip_deps = get_dependencies(old_env_dict)
-    channels = get_channels(old_env_dict)
+    # analyze original env
+    env_dict = to_dict(read_file(args.env_file))
+    conda_deps, pip_deps = get_dependencies(env_dict)
+    channels = get_channels(env_dict)  # we need channels from original file, because export can reorder them
 
-    # get whole env file from actual environment
-    env_locked_dict = to_dict(lock_env(to_yaml(old_env_dict)))
+    # create temp env and export dependencies from it
+    env_locked_dict = to_dict(lock_env(args.env_file))
+    conda_locked_deps, pip_locked_deps = get_dependencies(env_locked_dict)
 
-    # merge base and new dependencies
-    new_conda_deps = [x for x in conda_dependencies(env_locked_dict) if is_independent(x, channels=channels)]
-    new_conda_deps = merge_deps(old_conda_deps, new_conda_deps)
-    new_env_dict = replace_deps(old_env_dict, new_conda_deps, old_pip_deps)
+    # get only platform-independent conda dependencies (pip can't be checked that way)
+    conda_locked_deps = [x for x in conda_locked_deps if is_independent(x, channels=channels)]
+    # filter out local dependencies
+    pip_local_deps = [x for x in pip_deps if is_local_dep(x)]
+    pip_local_deps_pkgs = [pkg(x, base_dir=Path(args.env_file).parent) for x in pip_local_deps]
+    pip_locked_deps = [x for x in pip_locked_deps if pkg(x) not in pip_local_deps_pkgs]
+
+    # merge conda dependencies (it's necessary if you want to force platform-dependent dependency)
+    new_conda_deps = merge_deps(conda_deps, conda_locked_deps)
+    # get new env file
+    new_env_dict = replace_deps(env_dict, new_conda_deps, pip_locked_deps + pip_local_deps)
 
     print(to_yaml(new_env_dict))
 

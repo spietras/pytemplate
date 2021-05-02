@@ -7,20 +7,24 @@ channels:
   - conda-forge
 
 # add all direct development time conda packages here
-# package dependencies should be in setup.cfg instead
 # package will be installed locally with pip -e and afterwards can be treated as any other package
 # if you change something in the package's code you don't have to install the package again
 # that's because locally the code is accessed directly from the source
 # then you can use utils/conda-lock.py to create local.yml with all (even indirect) dependencies pinned
 # also if you put dependencies without version here utils/conda-lock.py will act as env updater
-# package dependencies should be in requirements.txt instead
 dependencies:
+  # env dependencies
   - python
   - pip
   - pytest
   - tox
   - mkdocs-material
   - yaml
+  # package dependencies
+  - numpy
+  - typer
+  - colorama
+  - shellingham
   - pip:
-      - -r file:requirements.txt
+      # local package in development mode
       - -e ../pytemplate
