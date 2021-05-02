@@ -3,12 +3,13 @@ channels:
   - defaults
   - conda-forge
 dependencies:
+  - python==3.9.4
+  - pip==21.0.1
   - _libgcc_mutex==0.1
   - ca-certificates==2021.4.13
   - certifi==2020.12.5
+  - libffi==3.3
   - openssl==1.1.1k
-  - pip==21.0.1
-  - python==3.9.2
   - setuptools==52.0.0
   - sqlite==3.35.4
   - tk==8.6.10

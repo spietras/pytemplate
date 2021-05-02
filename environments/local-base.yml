@@ -11,14 +11,16 @@ channels:
 # package will be installed locally with pip -e and afterwards can be treated as any other package
 # if you change something in the package's code you don't have to install the package again
 # that's because locally the code is accessed directly from the source
-# you can use utils/conda-lock.py to create local.yml with all (even indirect) dependencies pinned
+# then you can use utils/conda-lock.py to create local.yml with all (even indirect) dependencies pinned
+# also if you put dependencies without version here utils/conda-lock.py will act as env updater
 # package dependencies should be in requirements.txt instead
 dependencies:
-  - python==3.9.2
-  - pip==21.0.1
-  - pytest==6.2.3
-  - mkdocs-material==7.1.3
-  - yaml==0.2.5
+  - python
+  - pip
+  - pytest
+  - tox
+  - mkdocs-material
+  - yaml
   - pip:
       - -r file:requirements.txt
       - -e ../pytemplate

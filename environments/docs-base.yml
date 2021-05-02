@@ -10,6 +10,7 @@ channels:
 # as you can see we only need the mkdocs package
 # that's because no code needs to run, only the docs files are accessed
 # you can use utils/conda-lock.py to create docs.yml with all (even indirect) dependencies pinned
+# also if you put dependencies without version here utils/conda-lock.py will act as env updater
 dependencies:
-  - python==3.9.2
-  - mkdocs-material==7.1.3
+  - python
+  - mkdocs-material

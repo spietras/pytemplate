@@ -1,6 +1,7 @@
 # put all direct package dependencies here
 # you can use utils/pip-lock.py to create requirements.txt with all (even indirect) dependencies pinned
+# also if you put dependencies without version here utils/pip-lock.py will act as env updater
 # watch out for platform-specific dependencies though
 # you need to check if packages are platform-specific and add 'sys_platform' environment markers if they are
-numpy==1.20.2
-typer[all]==0.3.2
+numpy
+typer[all]

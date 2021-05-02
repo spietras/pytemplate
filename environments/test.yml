@@ -3,26 +3,33 @@ channels:
   - defaults
   - conda-forge
 dependencies:
+  - python==3.9.4
+  - pip==21.0.1
+  - pytest==6.2.3
+  - tox==3.23.0
   - _libgcc_mutex==0.1
+  - appdirs==1.4.4
   - attrs==20.3.0
   - ca-certificates==2021.4.13
   - certifi==2020.12.5
+  - distlib==0.3.1
+  - filelock==3.0.12
   - iniconfig==1.1.1
+  - libffi==3.3
   - more-itertools==8.7.0
   - openssl==1.1.1k
   - packaging==20.9
-  - pip==21.0.1
   - pluggy==0.13.1
   - py==1.10.0
   - pyparsing==2.4.7
-  - pytest==6.2.3
-  - python==3.9.2
+  - python_abi==3.9
   - setuptools==52.0.0
   - six==1.15.0
   - sqlite==3.35.4
   - tk==8.6.10
   - toml==0.10.2
   - tzdata==2020f
+  - virtualenv==20.4.4
   - wheel==0.36.2
   - xz==5.2.5
   - zlib==1.2.11
