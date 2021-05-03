@@ -32,6 +32,8 @@ jobs:
   test:
     name: Run tests
     strategy:
+      # don't stop all tests if one fails
+      fail-fast: false
       matrix:
         # better to use pinned versions here
         config:
