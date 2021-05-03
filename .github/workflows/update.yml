@@ -18,8 +18,12 @@ jobs:
       - name: Set up environment
         uses: conda-incubator/setup-miniconda@v2
         with:
-          activate-environment: pytemplate-docs
-          environment-file: environments/docs.yml
+          activate-environment: pytemplate
+          environment-file: environment.yml
+      - name: Install package
+        working-directory: pytemplate
+        # Sadly we need to install the package, waiting for https://github.com/python-poetry/poetry/issues/1644
+        run: poetry install --no-root --extras docs
       - name: Deploy docs
         run: mkdocs gh-deploy --force
   test:
@@ -40,7 +44,13 @@ jobs:
       - name: Set up environment
         uses: conda-incubator/setup-miniconda@v2
         with:
-          activate-environment: pytemplate-test
-          environment-file: environments/test.yml
+          activate-environment: pytemplate
+          environment-file: environment.yml
+      - name: Install package
+        working-directory: pytemplate
+        # workaround for non-editable install, waiting for https://github.com/python-poetry/poetry/issues/1382
+        run: |
+          poetry build -f wheel
+          pip install --find-links=dist pytemplate[test]
       - name: Run tests
         run: pytest pytemplate

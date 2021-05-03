@@ -1,0 +1,11 @@
+name: pytemplate
+
+# conda-forge used only if packages not found in defaults
+channels:
+  - defaults
+  - conda-forge
+
+# poetry will be used for further dependency management
+dependencies:
+  - python==3.9.4
+  - poetry==1.1.6
