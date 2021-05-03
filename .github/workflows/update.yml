@@ -22,3 +22,25 @@ jobs:
           environment-file: environments/docs.yml
       - name: Deploy docs
         run: mkdocs gh-deploy --force
+  test:
+    name: Run tests
+    strategy:
+      matrix:
+        config:
+          - { os: ubuntu-20.04, shell: bash -l }
+          - { os: macos-10.15, shell: bash -l }
+          - { os: windows-2019, shell: cmd /C CALL }
+    runs-on: ${{ matrix.config.os }}
+    defaults:
+      run:
+        shell: ${{ matrix.config.shell }} {0}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Set up environment
+        uses: conda-incubator/setup-miniconda@v2
+        with:
+          activate-environment: pytemplate-test
+          environment-file: environments/test.yml
+      - name: Run tests
+        run: pytest pytemplate
