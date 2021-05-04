@@ -52,11 +52,11 @@ jobs:
         # necessary for conda to work
         shell: ${{ matrix.config.shell }} {0}
     steps:
-      - name: Checkout code
-        # get repository code
+      - # get repository code
+        name: Checkout code
         uses: actions/checkout@v2
-      - name: Cache packages
-        # get conda, poetry and pip cache (persistent between runs)
+      - # get conda, poetry and pip cache (persistent between runs)
+        name: Cache packages
         uses: actions/cache@v2
         with:
           path: |
@@ -64,26 +64,30 @@ jobs:
             ${{ env.POETRY_CACHE_DIR }}
             ${{ env.PIP_CACHE_DIR }}
           key: ${{ runner.os }}-pkgs-${{ env.CACHE_NUMBER }} }}
-      - name: Set up environment
-        # create and activate conda environment
+      - # create and activate conda environment
+        name: Set up environment
         uses: conda-incubator/setup-miniconda@v2
         with:
           activate-environment: pytemplate
           environment-file: environment.yml
           # necessary for caching to work
           use-only-tar-bz2: true
-      - name: Set up poetry cache
-        # set up directories for poetry and pip cache (by default they are different on linux and windows)
+      - # set up directories for poetry and pip cache (by default they are different on linux and windows)
+        name: Set up poetry cache
         run: |
           poetry config cache-dir ${{ env.POETRY_CACHE_DIR }}
           pip config set global.cache-dir ${{ env.PIP_CACHE_DIR }}
-      - name: Build package
+      - # install only dependencies
+        name: Install dependencies
         working-directory: pytemplate
-        # workaround for non-editable install, waiting for https://github.com/python-poetry/poetry/issues/1382
+        run: poetry install --no-root --extras test
+      - # workaround for non-editable install, waiting for https://github.com/python-poetry/poetry/issues/1382
+        name: Build package
+        working-directory: pytemplate
         run: poetry build -f wheel
-      - name: Install package with test tools
+      - # use pip to install wheel produced in previous step
+        name: Install package
         working-directory: pytemplate
-        # use pip to install wheel produced in previous step
         run: pip install --find-links=dist pytemplate[test]
       - name: Run tests
         run: pytest pytemplate
