@@ -1,4 +1,4 @@
-name: Workflow for running tests
+name: Running tests
 
 on:
   push:

@@ -1,4 +1,4 @@
-name: Workflow for testing Docker build
+name: Testing docker build
 
 on:
   push:

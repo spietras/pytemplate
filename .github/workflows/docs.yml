@@ -1,4 +1,4 @@
-name: Workflow for deploying docs
+name: Deploying docs
 
 on:
   push:
