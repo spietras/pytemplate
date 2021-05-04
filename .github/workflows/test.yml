@@ -47,23 +47,17 @@ jobs:
         shell: ${{ matrix.config.shell }} {0}
     steps:
       - name: Checkout code
-        # Get repository code
+        # get repository code
         uses: actions/checkout@v2
-      - name: Cache conda
-        # Get conda cache (persistent between runs)
+      - name: Cache packages
+        # get conda, poetry and pip cache (persistent between runs)
         uses: actions/cache@v2
         with:
-          path: ${{ env.CONDA_CACHE_DIR }}
-          key: ${{ runner.os }}-conda-${{ env.CACHE_NUMBER }}-${{ hashFiles('environment.yml') }}
-      - name: Cache poetry
-        # Get poetry and pip cache (persistent between runs)
-        uses: actions/cache@v2
-        with:
-          # cache poetry and pip at the same time
           path: |
+            ${{ env.CONDA_CACHE_DIR }}
             ${{ env.POETRY_CACHE_DIR }}
             ${{ env.PIP_CACHE_DIR }}
-          key: ${{ runner.os }}-poetry-${{ env.CACHE_NUMBER }}-${{ hashFiles('pytemplate/pyproject.toml', 'pytemplate/poetry.lock') }}
+          key: ${{ runner.os }}-pkgs-${{ env.CACHE_NUMBER }} }}
       - name: Set up environment
         # create and activate conda environment
         uses: conda-incubator/setup-miniconda@v2
