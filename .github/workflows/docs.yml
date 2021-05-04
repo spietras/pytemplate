@@ -7,8 +7,10 @@ on:
       - main
     # trigger only on changes to the following files
     paths:
-      - 'docs/**'
-      - 'mkdocs.yml'
+      - 'pytemplate/docs/**'
+      - 'environment.yml'
+      - 'pytemplate/poetry.lock'
+      - 'pytemplate/pyproject.toml'
       - '.github/workflows/docs.yml'
 
 # env for all jobs
@@ -59,4 +61,5 @@ jobs:
         # sadly we need to install the package, waiting for https://github.com/python-poetry/poetry/issues/1644
         run: poetry install --no-root --extras docs
       - name: Deploy docs
+        working-directory: pytemplate/docs
         run: mkdocs gh-deploy --force
