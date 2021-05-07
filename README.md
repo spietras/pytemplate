@@ -133,6 +133,18 @@ To also run the container in one go, run:
 docker build -t pytemplate . && docker run --rm -it pytemplate
 ```
 
+## Jupyter
+
+You can use [```jupyter```](https://jupyter.org) to experiment with the code and make some great visualizations or reports.
+
+To launch ```jupyter lab``` environment, ```cd``` to ```notebooks``` (although you might do it as well from root if you want) and run:
+
+```sh
+jupyter lab
+```
+
+The developed package is installed in the environment so we can import it in the notebooks as any other package.
+
 ## Disclaimer: ```conda``` + ```poetry```
 
 ```poetry``` detects that it is inside a virtual environment and install all packages to that environment.
