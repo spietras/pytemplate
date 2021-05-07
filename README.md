@@ -11,7 +11,7 @@
 
 This ```README``` provides info about the development process.
 
-For more info about the package itself see ```pytemplate/README.md```.
+For more info about the package itself see ```pytemplate/README.md``` or [docs](https://spietras.github.io/pytemplate).
 
 ## Environment management
 
