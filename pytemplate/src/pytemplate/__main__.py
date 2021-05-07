@@ -10,7 +10,7 @@ from typing import Optional
 import typer
 from pytemplate.subpackage.module import get_something
 
-cli = typer.Typer()
+cli = typer.Typer()  # this is actually callable and thus can be an entry point
 
 
 @cli.command()
