@@ -1,0 +1,3 @@
+docs/** linguist-documentation
+pytemplate/docs/** linguist-documentation
+*.ipynb linguist-documentation
