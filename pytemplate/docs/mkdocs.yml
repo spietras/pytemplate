@@ -1,7 +1,7 @@
 site_name: pytemplate docs
 
-repo_url: https://github.com/spietras/python-template
-repo_name: spietras/python-template
+repo_url: https://github.com/spietras/pytemplate
+repo_name: spietras/pytemplate
 
 # disable edit button
 edit_uri: ""
@@ -69,7 +69,7 @@ extra:
   # footer social icons
   social:
     - icon: material/github
-      link: https://github.com/spietras/python-template
+      link: https://github.com/spietras/pytemplate
 
 nav:
   - Home: index.md

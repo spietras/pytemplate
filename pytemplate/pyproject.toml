@@ -8,6 +8,8 @@ classifiers = [
     "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent"
 ]
+repository = "https://github.com/spietras/pytemplate"
+documentation = "https://spietras.github.io/pytemplate"
 
 [tool.poetry.dependencies]
 python = "^3.9"
