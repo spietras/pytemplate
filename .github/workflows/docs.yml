@@ -43,6 +43,18 @@ jobs:
             ${{ env.POETRY_CACHE_DIR }}
             ${{ env.PIP_CACHE_DIR }}
           key: ${{ runner.os }}-pkgs-${{ env.CACHE_NUMBER }} }}
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+      - # set up pip cache
+        name: Set up pip cache
+        run: python3 -m pip config set global.cache-dir ${{ env.PIP_CACHE_DIR }}
+      - name: Install poetry
+        run: python3 -m pip install poetry
+      - # set up poetry cache
+        name: Set up poetry cache
+        run: poetry config cache-dir ${{ env.POETRY_CACHE_DIR }}
       - # create and activate conda environment
         name: Set up environment
         uses: conda-incubator/setup-miniconda@v2
@@ -51,11 +63,6 @@ jobs:
           environment-file: environment.yml
           # necessary for caching to work
           use-only-tar-bz2: true
-      - # set up directories for poetry and pip cache (by default they are different on linux and windows)
-        name: Set up poetry cache
-        run: |
-          poetry config cache-dir ${{ env.POETRY_CACHE_DIR }}
-          pip config set global.cache-dir ${{ env.PIP_CACHE_DIR }}
       - name: Install docs tools
         working-directory: pytemplate
         # we need to install all base dependencies, waiting for https://github.com/python-poetry/poetry/issues/1644

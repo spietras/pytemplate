@@ -15,7 +15,7 @@ For more info about the package itself see ```pytemplate/README.md``` or [docs](
 
 ## Environment management
 
-We are using [```conda```](https://conda.io) for environment management (and for installing ```poetry```). 
+We are using [```conda```](https://conda.io) for environment management. 
 The major reason is that ```conda``` lets you specify ```python``` version and will install that version in the environment.
 This ensures consistency between different instances (developers, CI, deployment).
 
@@ -44,7 +44,7 @@ conda env update -f environment.yml
 ## Package management
 
 We are using [```poetry```](https://python-poetry.org) to manage our package and its dependencies. 
-It's already installed in the environment.
+You need to have it installed outside our environment.
 
 To install the package, you need to ```cd``` into ```pytemplate``` directory and run:
 
@@ -52,7 +52,7 @@ To install the package, you need to ```cd``` into ```pytemplate``` directory and
 poetry install --extras dev
 ```
 
-This will download and install all package dependencies (including optional development ones) and install the package in editable mode.
+This will download and install all package dependencies (including optional development ones) and install the package in editable mode into the activate environment.
 
 Editable mode means that you don't have to reinstall the package if you change something in the code.
 The changes are reflected automatically. 
@@ -144,17 +144,3 @@ jupyter lab
 ```
 
 The developed package is installed in the environment so we can import it in the notebooks as any other package.
-
-## Disclaimer: ```conda``` + ```poetry```
-
-```poetry``` detects that it is inside a virtual environment and install all packages to that environment.
-That's cool but on the other hand ```conda``` is not supervising any further modifications to the environment.
-This means that ```poetry``` can change package versions that have been already accepted by ```conda``` and possibly break some constraints.
-
-For example we install ```poetry``` in the environment (managed by ```conda```) and ```poetry``` depends on package ```X```, versions ```1.5``` and above.
-Now let's say our package (managed by ```poetry```) also needs package ```X```, this time version ```1.4.0``` exclusively.
-```poetry``` doesn't know about any constraints managed by ```conda``` and will happily install package ```X``` in version ```1.4.0```, thus breaking the constraints.
-This can lead to ```poetry``` not working.
-
-Fortunately the only "packages" on ```conda``` side are ```python``` and ```poetry``` and they have a rather small number of very specific dependencies.
-The constraints are rather loose and hard to break in practice. Nevertheless, there is a risk.
