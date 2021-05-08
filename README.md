@@ -13,9 +13,26 @@ This ```README``` provides info about the development process.
 
 For more info about the package itself see ```pytemplate/README.md``` or [docs](https://spietras.github.io/pytemplate).
 
+## Quickstart (on Ubuntu)
+
+```sh
+$ apt update && apt install curl git python3 python3-pip python3-venv
+$ python3 -m pip install pipx && pipx install poetry
+$ pipx ensurepath && exec bash
+$ curl -sSL https://repo.anaconda.com/miniconda/Miniconda3-py39_4.9.2-Linux-x86_64.sh -o miniconda.sh
+$ bash miniconda.sh && exec bash
+(base) $ git clone https://github.com/spietras/pytemplate
+(base) $ cd pytemplate
+(base) $ conda env create -f environment.yml
+(base) $ conda activate pytemplate
+(pytemplate) $ cd pytemplate
+(pytemplate) $ poetry install --extras dev
+(pytemplate) $ pytemplate
+```
+
 ## Environment management
 
-We are using [```conda```](https://conda.io) for environment management. 
+We are using [```conda```](https://conda.io) for environment management (but you can as well use any other tool, e.g. ```pyenv + venv```). 
 The major reason is that ```conda``` lets you specify ```python``` version and will install that version in the environment.
 This ensures consistency between different instances (developers, CI, deployment).
 
@@ -44,7 +61,7 @@ conda env update -f environment.yml
 ## Package management
 
 We are using [```poetry```](https://python-poetry.org) to manage our package and its dependencies. 
-You need to have it installed outside our environment.
+You need to have it installed outside our environment (I recommend to use [```pipx```](https://pipxproject.github.io/pipx) for that).
 
 To install the package, you need to ```cd``` into ```pytemplate``` directory and run:
 
