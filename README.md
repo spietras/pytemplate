@@ -30,6 +30,15 @@ $ bash miniconda.sh && exec bash
 (pytemplate) $ pytemplate
 ```
 
+## Quickerstart
+
+If you just want to try it out and don't care about polluting your environment:
+
+```sh
+$ python3 -m pip install ./pytemplate
+$ pytemplate
+```
+
 ## Environment management
 
 We are using [```conda```](https://conda.io) for environment management (but you can as well use any other tool, e.g. ```pyenv + venv```). 
