@@ -145,7 +145,7 @@ Generally if you see a red mark next to your commit on Github or a failing statu
 ## Docker
 
 You can build a Docker image of the package (e.g. for deployment).
-The build process in defined in ```Dockerfile``` and it's optimized to keep the size small.
+The build process is defined in ```Dockerfile``` and it's optimized to keep the size small.
 
 To build the image, run from project root:
 

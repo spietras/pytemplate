@@ -6,7 +6,7 @@ RUN apk add --no-cache bash \
     && conda install poetry \
     && conda clean -afy
 
-# update base environment (instead of creating new one to keep the image size small) and delete cache
+# create new environment
 # see: https://jcristharif.com/conda-docker-tips.html
 # warning: for some reason conda can hang on "Executing transaction" for a couple of minutes
 COPY environment.yml /tmp/environment.yml
