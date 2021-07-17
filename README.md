@@ -2,8 +2,8 @@
 
 <div align="center">
 
-[![Running tests](https://github.com/spietras/python-template/actions/workflows/test.yml/badge.svg)](https://github.com/spietras/python-template/actions/workflows/test.yml)
-[![Deploying docs](https://github.com/spietras/python-template/actions/workflows/docs.yml/badge.svg)](https://github.com/spietras/python-template/actions/workflows/docs.yml)
+[![Running tests](https://github.com/spietras/pytemplate/actions/workflows/test.yml/badge.svg)](https://github.com/spietras/pytemplate/actions/workflows/test.yml)
+[![Deploying docs](https://github.com/spietras/pytemplate/actions/workflows/docs.yml/badge.svg)](https://github.com/spietras/pytemplate/actions/workflows/docs.yml)
 
 </div>
 
@@ -136,11 +136,17 @@ Other people only need to run ```poetry install``` to adjust to the incoming cha
 ## Continuous Integration
 
 When you push changes to remote, different Github Actions run to ensure project consistency.
-There are defined workflows for testing on different platforms, deploying docs to Github Pages and testing Docker builds.
+There are defined workflows for:
+
+- testing on different platforms
+- deploying docs to Github Pages
+- testing Docker builds
 
 For more info see the files in ```.github/workflows``` directory and ```Actions``` tab on Github.
 
 Generally if you see a red mark next to your commit on Github or a failing status on badges in ```README``` it means the commit broke something (or workflows themselves are broken).
+
+
 
 ## Docker
 

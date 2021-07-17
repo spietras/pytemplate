@@ -2,7 +2,7 @@
 name = "pytemplate"
 version = "0.1.0"
 description = "A small example package"
-readme = 'README.md'
+readme = "README.md"
 authors = ["Example Author <author@example.com>"]
 classifiers = [
     "License :: OSI Approved :: MIT License",
@@ -13,7 +13,6 @@ documentation = "https://spietras.github.io/pytemplate"
 
 [tool.poetry.dependencies]
 python = "^3.9"
-numpy = "^1.20"
 typer = { version = "^0.3", extras = ["all"] }
 
 # dev
@@ -30,7 +29,6 @@ mkdocs-material = { version = "^7", optional = true }
 dev = ["jupyterlab", "pytest", "mkdocs-material"]
 test = ["pytest"]
 docs = ["mkdocs-material"]
-
 [tool.poetry.scripts]
 # cli entry point
 pytemplate = "pytemplate.__main__:cli"

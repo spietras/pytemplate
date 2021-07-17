@@ -1,12 +1,12 @@
 # pytemplate
 
-This is a simple example package.
+A small example package
 
 It lets you easily accomplish the following things:
 
 - [x] **nothing**
 
-But at least it shows some opinionated best practices about python projects.
+But at least it shows some opinionated best practices about python project structure.
 
 ## Installing
 

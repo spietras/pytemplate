@@ -2,10 +2,10 @@
 
 ```
 $ pytemplate
-Hello World.
+1
 ```
 
-That's it. It just prints ```Hello World```.
+That's it. It just prints ```x``` argument.
 
 ## Full usage
 

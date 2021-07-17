@@ -8,7 +8,6 @@ import sys
 from typing import Optional
 
 import typer
-from pytemplate.subpackage.module import get_something
 
 cli = typer.Typer()  # this is actually callable and thus can be an entry point
 
@@ -17,7 +16,7 @@ cli = typer.Typer()  # this is actually callable and thus can be an entry point
 def main(x: int = typer.Option(default=1, help="Dummy argument.")) -> Optional[int]:
     """Command line interface for pytemplate."""
 
-    typer.echo(get_something(x))  # typer.echo instead of print, because it's better
+    typer.echo(x)  # typer.echo instead of print, because it's better
 
 
 if __name__ == '__main__':
