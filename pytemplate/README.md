@@ -19,13 +19,13 @@ But at least it shows some opinionated best practices about python project struc
 
 ## Installing
 
-Using ```pip```<sup>*</sup>:
+Using `pip`<sup>\*</sup>:
 
 ```sh
 pip install pytemplate
 ```
 
-<sup><sup>* assuming the authors bothered to release the package on PyPI...</sup></sup>
+<sup><sup>\* assuming the authors bothered to release the package on PyPI...</sup></sup>
 
 ## Usage as a library
 

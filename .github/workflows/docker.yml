@@ -7,24 +7,24 @@ on:
       - main
     # trigger only on changes to the following files
     paths:
-      - 'pytemplate/src/**'
-      - 'environment.yml'
-      - 'pytemplate/poetry.lock'
-      - 'pytemplate/pyproject.toml'
-      - 'Dockerfile'
-      - '.github/workflows/docker.yml'
+      - "pytemplate/src/**"
+      - "environment.yml"
+      - "pytemplate/poetry.lock"
+      - "pytemplate/pyproject.toml"
+      - "Dockerfile"
+      - ".github/workflows/docker.yml"
   pull_request:
     # trigger only on main branch
     branches:
       - main
     # trigger only on changes to the following files
     paths:
-      - 'pytemplate/src/**'
-      - 'environment.yml'
-      - 'pytemplate/poetry.lock'
-      - 'pytemplate/pyproject.toml'
-      - 'Dockerfile'
-      - '.github/workflows/docker.yml'
+      - "pytemplate/src/**"
+      - "environment.yml"
+      - "pytemplate/poetry.lock"
+      - "pytemplate/pyproject.toml"
+      - "Dockerfile"
+      - ".github/workflows/docker.yml"
 
 jobs:
   docker:
