@@ -1,10 +1,11 @@
-FROM continuumio/miniconda3:4.9.2-alpine
+FROM continuumio/miniconda3:4.10.3-alpine
 
 # add bash, because it's not available by default on alpine
-# also install poetry
-RUN apk add --no-cache bash && \
-    conda install poetry && \
-    conda clean -afy
+RUN apk add --no-cache bash
+
+# install poetry
+COPY ./requirements.txt /tmp/requirements.txt
+RUN python3 -m pip install --no-cache-dir -r /tmp/requirements.txt
 
 # create new environment
 # see: https://jcristharif.com/conda-docker-tips.html

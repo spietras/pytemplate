@@ -1,6 +1,6 @@
 # pytemplate
 
-A small example package
+This is a simple example package.
 
 It lets you easily accomplish the following things:
 

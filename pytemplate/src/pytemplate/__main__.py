@@ -17,6 +17,7 @@ def main(x: int = typer.Option(default=1, help="Dummy argument.")) -> Optional[i
     """Command line interface for pytemplate."""
 
     typer.echo(x)  # typer.echo instead of print, because it's better
+    return None
 
 
 if __name__ == '__main__':

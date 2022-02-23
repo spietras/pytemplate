@@ -1,0 +1,8 @@
+*
+!pytemplate/src/**
+!pytemplate/pyproject.toml
+!pytemplate/poetry.lock
+!pytemplate/LICENSE
+!pytemplate/README.md
+!environment.yml
+!requirements.txt
