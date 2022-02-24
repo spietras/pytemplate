@@ -34,6 +34,6 @@ COPY ./pytemplate/LICENSE ./pytemplate/README.md /tmp/pytemplate/
 
 # build wheel by poetry and install by pip (to force non-editable mode)
 RUN poetry build -f wheel && \
-    python -m pip install --no-cache-dir --find-links=dist pytemplate
+    python -m pip install --no-index --no-cache-dir --find-links=dist pytemplate
 
 ENTRYPOINT ["conda", "run", "--no-capture-output", "-n", "pytemplate", "pytemplate"]

@@ -96,6 +96,6 @@ jobs:
         name: Install package
         working-directory: pytemplate
         # python from conda should be called just by 'python', not 'python3'
-        run: python -m pip install --find-links=dist pytemplate[test]
+        run: python -m pip install --no-index --no-cache-dir --find-links=dist pytemplate[test]
       - name: Run tests
         run: pytest pytemplate
