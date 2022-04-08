@@ -3,7 +3,7 @@ name = "anyio"
 version = "3.5.0"
 description = "High level compatibility layer for multiple asynchronous event loop implementations"
 category = "main"
-optional = false
+optional = true
 python-versions = ">=3.6.2"
 
 [package.dependencies]
@@ -20,7 +20,7 @@ name = "appnope"
 version = "0.1.2"
 description = "Disable App Nap on macOS >= 10.9"
 category = "main"
-optional = true
+optional = false
 python-versions = "*"
 
 [[package]]
@@ -59,7 +59,7 @@ name = "asttokens"
 version = "2.0.5"
 description = "Annotate AST trees with source code positions"
 category = "main"
-optional = true
+optional = false
 python-versions = "*"
 
 [package.dependencies]
@@ -106,7 +106,7 @@ name = "backcall"
 version = "0.2.0"
 description = "Specifications for callback functions passed in to an API"
 category = "main"
-optional = true
+optional = false
 python-versions = "*"
 
 [[package]]
@@ -114,7 +114,7 @@ name = "black"
 version = "22.1.0"
 description = "The uncompromising code formatter."
 category = "main"
-optional = true
+optional = false
 python-versions = ">=3.6.2"
 
 [package.dependencies]
@@ -198,7 +198,7 @@ name = "debugpy"
 version = "1.5.1"
 description = "An implementation of the Debug Adapter Protocol for Python"
 category = "main"
-optional = true
+optional = false
 python-versions = ">=2.7,!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*,!=3.4.*"
 
 [[package]]
@@ -206,7 +206,7 @@ name = "decorator"
 version = "5.1.1"
 description = "Decorators for Humans"
 category = "main"
-optional = true
+optional = false
 python-versions = ">=3.5"
 
 [[package]]
@@ -230,7 +230,7 @@ name = "executing"
 version = "0.8.2"
 description = "Get the currently executing AST node of a frame, and other information"
 category = "main"
-optional = true
+optional = false
 python-versions = "*"
 
 [[package]]
@@ -238,7 +238,7 @@ name = "idna"
 version = "3.3"
 description = "Internationalized Domain Names in Applications (IDNA)"
 category = "main"
-optional = false
+optional = true
 python-versions = ">=3.5"
 
 [[package]]
@@ -254,7 +254,7 @@ name = "ipykernel"
 version = "6.9.1"
 description = "IPython Kernel for Jupyter"
 category = "main"
-optional = true
+optional = false
 python-versions = ">=3.7"
 
 [package.dependencies]
@@ -275,7 +275,7 @@ name = "ipython"
 version = "8.0.1"
 description = "IPython: Productive Interactive Computing"
 category = "main"
-optional = true
+optional = false
 python-versions = ">=3.8"
 
 [package.dependencies]
@@ -310,7 +310,7 @@ name = "ipython-genutils"
 version = "0.2.0"
 description = "Vestigial utilities from IPython"
 category = "main"
-optional = true
+optional = false
 python-versions = "*"
 
 [[package]]
@@ -318,7 +318,7 @@ name = "jedi"
 version = "0.18.1"
 description = "An autocompletion tool for Python that can be used for text editors."
 category = "main"
-optional = true
+optional = false
 python-versions = ">=3.6"
 
 [package.dependencies]
@@ -407,7 +407,7 @@ name = "jupyter-server"
 version = "1.15.4"
 description = "The backend—i.e. core services, APIs, and REST endpoints—to Jupyter web applications."
 category = "main"
-optional = false
+optional = true
 python-versions = ">=3.7"
 
 [package.dependencies]
@@ -498,7 +498,7 @@ name = "matplotlib-inline"
 version = "0.1.3"
 description = "Inline Matplotlib backend for Jupyter"
 category = "main"
-optional = true
+optional = false
 python-versions = ">=3.5"
 
 [package.dependencies]
@@ -517,7 +517,7 @@ name = "mypy-extensions"
 version = "0.4.3"
 description = "Experimental type system extensions for programs checked with the mypy typechecker."
 category = "main"
-optional = true
+optional = false
 python-versions = "*"
 
 [[package]]
@@ -610,10 +610,10 @@ python-versions = ">=3.5"
 
 [[package]]
 name = "notebook"
-version = "6.4.8"
+version = "6.4.10"
 description = "A web-based notebook environment for interactive computing"
 category = "main"
-optional = true
+optional = false
 python-versions = ">=3.6"
 
 [package.dependencies]
@@ -623,7 +623,7 @@ ipython-genutils = "*"
 jinja2 = "*"
 jupyter-client = ">=5.3.4"
 jupyter-core = ">=4.6.1"
-nbconvert = "*"
+nbconvert = ">=5"
 nbformat = "*"
 nest-asyncio = ">=1.5"
 prometheus-client = "*"
@@ -662,7 +662,7 @@ name = "parso"
 version = "0.8.3"
 description = "A Python Parser"
 category = "main"
-optional = true
+optional = false
 python-versions = ">=3.6"
 
 [package.extras]
@@ -674,7 +674,7 @@ name = "pathspec"
 version = "0.9.0"
 description = "Utility library for gitignore style pattern matching of file paths."
 category = "main"
-optional = true
+optional = false
 python-versions = "!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*,!=3.4.*,>=2.7"
 
 [[package]]
@@ -682,7 +682,7 @@ name = "pexpect"
 version = "4.8.0"
 description = "Pexpect allows easy control of interactive console applications."
 category = "main"
-optional = true
+optional = false
 python-versions = "*"
 
 [package.dependencies]
@@ -693,7 +693,7 @@ name = "pickleshare"
 version = "0.7.5"
 description = "Tiny 'shelve'-like database with concurrency support"
 category = "main"
-optional = true
+optional = false
 python-versions = "*"
 
 [[package]]
@@ -701,7 +701,7 @@ name = "platformdirs"
 version = "2.5.1"
 description = "A small Python module for determining appropriate platform-specific dirs, e.g. a \"user data dir\"."
 category = "main"
-optional = true
+optional = false
 python-versions = ">=3.7"
 
 [package.extras]
@@ -736,7 +736,7 @@ name = "prompt-toolkit"
 version = "3.0.28"
 description = "Library for building powerful interactive command lines in Python"
 category = "main"
-optional = true
+optional = false
 python-versions = ">=3.6.2"
 
 [package.dependencies]
@@ -755,7 +755,7 @@ name = "pure-eval"
 version = "0.2.2"
 description = "Safely evaluate AST nodes without side effects"
 category = "main"
-optional = true
+optional = false
 python-versions = "*"
 
 [package.extras]
@@ -924,7 +924,7 @@ name = "sniffio"
 version = "1.2.0"
 description = "Sniff out which async library your code is running under"
 category = "main"
-optional = false
+optional = true
 python-versions = ">=3.5"
 
 [[package]]
@@ -932,7 +932,7 @@ name = "stack-data"
 version = "0.2.0"
 description = "Extract data from python stack frames and tracebacks for informative displays"
 category = "main"
-optional = true
+optional = false
 python-versions = "*"
 
 [package.dependencies]
@@ -975,7 +975,7 @@ name = "tomli"
 version = "2.0.1"
 description = "A lil' TOML parser"
 category = "main"
-optional = true
+optional = false
 python-versions = ">=3.7"
 
 [[package]]
@@ -1021,7 +1021,7 @@ name = "typing-extensions"
 version = "4.1.1"
 description = "Backported and Experimental Type Hints for Python 3.6+"
 category = "main"
-optional = true
+optional = false
 python-versions = ">=3.6"
 
 [[package]]
@@ -1042,7 +1042,7 @@ name = "wcwidth"
 version = "0.2.5"
 description = "Measures the displayed width of unicode strings in a terminal"
 category = "main"
-optional = true
+optional = false
 python-versions = "*"
 
 [[package]]
@@ -1058,7 +1058,7 @@ name = "websocket-client"
 version = "1.2.3"
 description = "WebSocket client for Python with low level API options"
 category = "main"
-optional = false
+optional = true
 python-versions = ">=3.6"
 
 [package.extras]
@@ -1402,8 +1402,8 @@ nest-asyncio = [
     {file = "nest_asyncio-1.5.4.tar.gz", hash = "sha256:f969f6013a16fadb4adcf09d11a68a4f617c6049d7af7ac2c676110169a63abd"},
 ]
 notebook = [
-    {file = "notebook-6.4.8-py3-none-any.whl", hash = "sha256:3e702fcc54b8ae597533c3864793b7a1e971dec9e112f67235828d8a798fd654"},
-    {file = "notebook-6.4.8.tar.gz", hash = "sha256:1e985c9dc6f678bdfffb9dc657306b5469bfa62d73e03f74e8defbf76d284312"},
+    {file = "notebook-6.4.10-py3-none-any.whl", hash = "sha256:49cead814bff0945fcb2ee07579259418672ac175d3dc3d8102a4b0a656ed4df"},
+    {file = "notebook-6.4.10.tar.gz", hash = "sha256:2408a76bc6289283a8eecfca67e298ec83c67db51a4c2e1b713dd180bb39e90e"},
 ]
 packaging = [
     {file = "packaging-21.3-py3-none-any.whl", hash = "sha256:ef103e05f519cdc783ae24ea4e2e0f508a9c99b2d4969652eed6a2e1ea5bd522"},
