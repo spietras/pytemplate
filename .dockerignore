@@ -1,5 +1,6 @@
 *
 !pytemplate/src/**
+!pytemplate/tests/**
 !pytemplate/pyproject.toml
 !pytemplate/poetry.lock
 !pytemplate/LICENSE

@@ -28,10 +28,10 @@ class TestPytemplate:
         assert result.output
 
     def test_pytemplate_prints_help(self, runner):
-        result = runner.invoke(cli, ['--help'])
+        result = runner.invoke(cli, ["--help"])
         assert "Usage" in result.output
 
     def test_pytemplate_works_with_arg(self, runner):
-        result = runner.invoke(cli, ['--x', 2])
+        result = runner.invoke(cli, ["--x", 2])
         assert not result.exception
         assert result.exit_code == 0

@@ -1,13 +1,17 @@
+# this file is needed to install the package from git without support for subdirectories
+# see: https://github.com/python-poetry/poetry/issues/755
+
 [tool.poetry]
 name = "pytemplate"
 version = "0.1.0"
 description = "This is a simple example package."
-readme = "README.md"
+readme = "pytemplate/README.md"
 authors = ["Example Author <author@example.com>"]
 classifiers = ["License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent"]
 repository = "https://github.com/spietras/pytemplate"
 documentation = "https://spietras.github.io/pytemplate"
+packages = [{ include = "pytemplate", from = "pytemplate/src" }]
 
 [tool.poetry.dependencies]
 python = "^3.9"

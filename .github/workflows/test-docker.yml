@@ -1,6 +1,7 @@
-name: Testing docker build
+name: Docker tests
 
 on:
+  workflow_dispatch:
   push:
     # trigger only on main branch
     branches:
@@ -8,12 +9,13 @@ on:
     # trigger only on changes to the following files
     paths:
       - "pytemplate/src/**"
+      - "pytemplate/tests/**"
       - "pytemplate/poetry.lock"
       - "pytemplate/pyproject.toml"
       - "environment.yml"
       - "requirements.txt"
       - "Dockerfile"
-      - ".github/workflows/docker.yml"
+      - ".github/workflows/test-docker.yml"
   pull_request:
     # trigger only on main branch
     branches:
@@ -21,15 +23,17 @@ on:
     # trigger only on changes to the following files
     paths:
       - "pytemplate/src/**"
+      - "pytemplate/tests/**"
       - "pytemplate/poetry.lock"
       - "pytemplate/pyproject.toml"
       - "environment.yml"
       - "requirements.txt"
       - "Dockerfile"
-      - ".github/workflows/docker.yml"
+      - ".github/workflows/test-docker.yml"
 
 jobs:
-  docker-build:
+  test-docker:
+    name: Run tests inside Docker container
     runs-on: ubuntu-20.04
     steps:
       - # get repository code
@@ -41,7 +45,10 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: .
-          push: false
-          tags: pytemplate:latest
+          target: test
+          load: true
+          tags: pytemplate:test
           cache-from: type=gha, scope=${{ github.workflow }}
           cache-to: type=gha, mode=max, scope=${{ github.workflow }}
+      - name: Run tests
+        run: docker run --rm pytemplate:test

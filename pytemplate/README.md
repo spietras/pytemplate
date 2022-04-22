@@ -2,14 +2,15 @@
 
 <div align="center">
 
-[![Running tests](https://github.com/spietras/pytemplate/actions/workflows/test.yml/badge.svg)](https://github.com/spietras/pytemplate/actions/workflows/test.yml)
-[![Deploying docs](https://github.com/spietras/pytemplate/actions/workflows/docs.yml/badge.svg)](https://github.com/spietras/pytemplate/actions/workflows/docs.yml)
+This is a simple example package.
+
+[![Multiplatform tests](https://github.com/spietras/pytemplate/actions/workflows/test-multiplatform.yml/badge.svg)](https://github.com/spietras/pytemplate/actions/workflows/test-multiplatform.yml)
+[![Docker tests](https://github.com/spietras/pytemplate/actions/workflows/test-docker.yml/badge.svg)](https://github.com/spietras/pytemplate/actions/workflows/test-docker.yml)
+[![Docs](https://github.com/spietras/pytemplate/actions/workflows/docs.yml/badge.svg)](https://github.com/spietras/pytemplate/actions/workflows/docs.yml)
 
 </div>
 
 ---
-
-This is a simple example package.
 
 It lets you easily accomplish the following things:
 

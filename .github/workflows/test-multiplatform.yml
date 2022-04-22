@@ -1,6 +1,7 @@
-name: Running tests
+name: Multiplatform tests
 
 on:
+  workflow_dispatch:
   push:
     # trigger only on main branch
     branches:
@@ -13,7 +14,7 @@ on:
       - "pytemplate/pyproject.toml"
       - "environment.yml"
       - "requirements.txt"
-      - ".github/workflows/test.yml"
+      - ".github/workflows/test-multiplatform.yml"
   pull_request:
     # trigger only on main branch
     branches:
@@ -26,7 +27,7 @@ on:
       - "pytemplate/pyproject.toml"
       - "environment.yml"
       - "requirements.txt"
-      - ".github/workflows/test.yml"
+      - ".github/workflows/test-multiplatform.yml"
 
 # env for all jobs
 env:
@@ -96,6 +97,6 @@ jobs:
         name: Install package
         working-directory: pytemplate
         # python from conda should be called just by 'python', not 'python3'
-        run: python -m pip install --no-index --no-cache-dir --find-links=dist pytemplate[test]
+        run: python -m pip install --no-deps --no-index --no-cache-dir --find-links=dist pytemplate[test]
       - name: Run tests
         run: pytest pytemplate
